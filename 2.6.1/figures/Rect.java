@@ -7,13 +7,7 @@ import javax.swing.*;
 public class Rect extends Figure {
 
     public Rect(int x, int y, int w, int h, Color corFundo, Color corContorno){
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
-
-        this.corContorno = corContorno;
-        this.corFundo = corFundo;
+        super(x, y, w, h, corFundo, corContorno);
     }
 
     public void paint(Graphics g){

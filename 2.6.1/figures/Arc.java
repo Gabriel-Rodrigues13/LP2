@@ -5,13 +5,7 @@ import java.awt.*;
 public class Arc extends Figure {
 
     public Arc (int x, int y, int w, int h, Color corFundo, Color corContorno){
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
-
-        this.corContorno = corContorno;
-        this.corFundo = corFundo;
+        super(x, y, w, h, corFundo, corContorno);
     }
 
     public void paint(Graphics g){
