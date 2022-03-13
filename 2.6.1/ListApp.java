@@ -39,6 +39,9 @@ class ListFrame extends JFrame {
                     if (evt.getKeyChar() == 'e') {
                         figs.add(new Ellipse(x,y, w,h,new Color(45, 128, 170), new Color(250, 0, 0)));
                     }
+                    if (evt.getKeyChar() == 'a') {
+                        figs.add(new Arc(x,y, w,h,new Color(45, 128, 170), new Color(250, 0, 0)));
+                    }
                     repaint();
                 }
             }
