@@ -8,12 +8,7 @@ import java.awt.geom.Ellipse2D;
 public class Ellipse extends Figure {
 
     public Ellipse (int x, int y, int w, int h, Color corFundo, Color corContorno) {
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
-        this.corFundo = corFundo;
-        this.corContorno = corContorno;
+        super(x, y, w, h, corFundo, corContorno);
     }
 
     public void paint (Graphics g) {
