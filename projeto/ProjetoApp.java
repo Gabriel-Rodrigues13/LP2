@@ -3,15 +3,13 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Random;
-
 import figures.*;
 import properties.Colours;
 import properties.KeyTypes;
 
 class ProjetoApp {
-    
-    public static void main (String[] args) {
+
+    public static void main(String[] args) {
         FrameState frameState = new FrameState();
         EventHandlers eventHandler = new EventHandlers(frameState);
         ListFrame frame = new ListFrame(frameState, eventHandler);
@@ -19,14 +17,15 @@ class ProjetoApp {
     }
 }
 
-class EventHandlers{
+class EventHandlers {
     public FrameState frameState;
+
     public EventHandlers(FrameState frameState) {
         this.frameState = frameState;
     }
 
     public void handleColorSwitchEventColor(int keyCode) {
-        switch(keyCode) {
+        switch (keyCode) {
             case KeyTypes.botaoPrimeiraCor:
                 frameState.updateCorContorno(Colours.cor_fundo_um);
                 frameState.updateCorFundo(Colours.cor_contorno_um);
@@ -44,23 +43,75 @@ class EventHandlers{
         }
     }
 
+    public void handleAlteracaoFiguras(int keyCode) {
+        switch (keyCode) {
+            case KeyTypes.botaoCriarRect:
+                Rect rect = new Rect(frameState.getMouseX(), frameState.getMouseY(),
+                        frameState.corFundo, frameState.corContorno);
+                frameState.figs.add(rect);
+                break;
+            case KeyTypes.botaoCriarEllipse:
+                Ellipse elli = new Ellipse(frameState.getMouseX(), frameState.getMouseY(),
+                        frameState.corFundo, frameState.corContorno);
+                frameState.figs.add(elli);
+                break;
+            case KeyTypes.botaoCriarArc:
+                Arc arc = new Arc(frameState.getMouseX(), frameState.getMouseY(),
+                        frameState.corFundo, frameState.corContorno);
+                frameState.figs.add(arc);
+                break;
+            case KeyTypes.botaoApagarFigura:
+                frameState.figs.remove(frameState.focus);
+                frameState.focus = null;
+                break;
+            case KeyTypes.botaoApagarTodas:
+                frameState.figs.clear();
+                frameState.focus = null;
+                break;
+            case KeyTypes.botaoResizeUp:
+                resizeFigure(frameState.focus.redimensionarY());
+                break;
+            case KeyTypes.botaoResizeDown:
+                resizeFigure(frameState.focus.redimensionarH());
+                break;
+            case KeyTypes.botaoResizeLeft:
+                resizeFigure(frameState.focus.redimensionarX());
+                break;
+            case KeyTypes.botaoResizeRight:
+                resizeFigure(frameState.focus.redimensionarW());
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void resizeFigure(Figure novaFigura) {
+        this.frameState.figs.remove(frameState.focus);
+        this.frameState.figs.add(novaFigura);
+        this.frameState.focus = novaFigura;
+    }
+
     public void handleMouseMovement(MouseEvent e) {
-        frameState.posicaoMouse[0] = e.getX();
-        frameState.posicaoMouse[1] = e.getY();
+        frameState.setMouseX(e.getX());
+        frameState.setMouseY(e.getY());
     }
-    public void handleMouseDrag(MouseEvent e){
 
+    public void mouseDragged(MouseEvent e) {
+        Figure novaFigura = frameState.focus.drag(e);
+        frameState.figs.remove(frameState.focus);
+        frameState.figs.add(novaFigura);
+        frameState.focus = novaFigura;
     }
+
 }
-
 
 class FrameState {
     ArrayList<Figure> figs = new ArrayList<Figure>();
-    Random rand = new Random();
     Figure focus = null;
     Color corFundo = Colours.cor_fundo_um;
     Color corContorno = Colours.cor_contorno_um;
-    int[] posicaoMouse = new int[2];
+    private int posicaoMouseX = 0;
+    private int posicaoMouseY = 0;
 
     public void updateCorFundo(Color cor) {
         this.corFundo = cor;
@@ -69,39 +120,49 @@ class FrameState {
     public void updateCorContorno(Color cor) {
         this.corContorno = cor;
     }
-    
+
+    public int getMouseX() {
+        return this.posicaoMouseX;
+    }
+
+    public int getMouseY() {
+        return this.posicaoMouseY;
+    }
+
+    public void setMouseX(int pos) {
+        this.posicaoMouseX = pos;
+    }
+
+    public void setMouseY(int pos) {
+        this.posicaoMouseY = pos;
+    }
+
 }
 
 class ListFrame extends JFrame {
     FrameState frameState;
     EventHandlers eventHandler;
 
-    
-    ListFrame (FrameState frameState, EventHandlers eventHandler) {
+    ListFrame(FrameState frameState, EventHandlers eventHandler) {
         this.frameState = frameState;
         this.eventHandler = eventHandler;
 
-        this.addWindowListener (
-            new WindowAdapter() {
-                public void windowClosing (WindowEvent e) {
-                    System.exit(0);
-                }
-            }
-        );
+        this.addWindowListener(
+                new WindowAdapter() {
+                    public void windowClosing(WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
 
-
-        // Pegando a posição do cursor 
+        // Pegando a posição do cursor
         this.addMouseMotionListener(new MouseAdapter() {
-            public void mouseMoved(MouseEvent e){
+            public void mouseMoved(MouseEvent e) {
                 eventHandler.handleMouseMovement(e);
             }
 
-        // Movendo a figura com o mouse 
-            public void mouseDragged(MouseEvent e){
-                Figure novaFigura = frameState.focus.drag(e);
-                frameState.figs.remove(frameState.focus);
-                frameState.figs.add(novaFigura);
-                frameState.focus = novaFigura;
+            // Movendo a figura com o mouse
+            public void mouseDragged(MouseEvent e) {
+                eventHandler.mouseDragged(e);
                 repaint();
             }
         });
@@ -109,90 +170,35 @@ class ListFrame extends JFrame {
         // Key listeners de mudança de cores
 
         this.addKeyListener(
-            new KeyAdapter(){
-                public void keyPressed(KeyEvent evt){
-                    eventHandler.handleColorSwitchEventColor(evt.getKeyCode());
-                    repaint();
-                }
-            }
-        );
+                new KeyAdapter() {
+                    public void keyPressed(KeyEvent evt) {
+                        eventHandler.handleColorSwitchEventColor(evt.getKeyCode());
+                        repaint();
+                    }
+                });
 
         // Key listeners de manipulaçao de figuras
-        this.addKeyListener (
-            new KeyAdapter() {
-                public void keyPressed (KeyEvent evt) {
-                    int x = frameState.posicaoMouse[0];
-                    int y = frameState.posicaoMouse[1];
-                    int w = 50;
-                    int h = 100;
-                    Rect rect = new Rect(x, y, w, h, frameState.corFundo, frameState.corContorno);
-                    Ellipse elli = new Ellipse(x, y, w, h, frameState.corFundo, frameState.corContorno);
-                    Arc arc = new Arc(x, y, w, h, frameState.corFundo, frameState.corContorno);
+        this.addKeyListener(
+                new KeyAdapter() {
+                    public void keyPressed(KeyEvent evt) {
+                        eventHandler.handleAlteracaoFiguras(evt.getKeyCode());
+                        repaint();
+                    }
+                });
 
-                    if (evt.getKeyCode() == KeyEvent.VK_R) {
-                        frameState.figs.add(rect);
-                    }
-                    else if (evt.getKeyCode() == KeyEvent.VK_E) {
-                        frameState.figs.add(elli);
-                    }
-                    else if (evt.getKeyCode() == KeyEvent.VK_A) {
-                        frameState.figs.add(arc);
-                    }       
-                    else if( evt.getKeyCode() == KeyEvent.VK_BACK_SPACE){
-                        frameState.figs.remove(frameState.focus);
-                        frameState.focus = null;;
-                    }
-                    else if( evt.getKeyCode() == KeyEvent.VK_DELETE){
-                        frameState.figs.clear();
-                        frameState.focus = null;
-                    }
-                    else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
-                        Figure new_figure = frameState.focus.redimensionarW();
-                        frameState.figs.remove(frameState.focus);
-                        frameState.figs.add(new_figure);
-                        frameState.focus = new_figure;
-                        
-                    }
-                    else if(evt.getKeyCode() == KeyEvent.VK_LEFT){
-                        Figure new_figure = frameState.focus.redimensionarX();
-                        frameState.figs.remove(frameState.focus);
-                        frameState.figs.add(new_figure);
-                        frameState.focus = new_figure;
-                        
-                    }
-                    else if(evt.getKeyCode() == KeyEvent.VK_UP){
-                        Figure new_figure = frameState.focus.redimensionarY();
-                        frameState.figs.remove(frameState.focus);
-                        frameState.figs.add(new_figure);
-                        frameState.focus = new_figure;
-                        
-                    }
-                    else if(evt.getKeyCode() == KeyEvent.VK_DOWN){
-                        Figure new_figure = frameState.focus.redimensionarH();
-                        frameState.figs.remove(frameState.focus);
-                        frameState.figs.add(new_figure);
-                        frameState.focus = new_figure;
-                        
-                    }
-            
-                    repaint();
-                }
-            }
-        );
-        
         // Criando foco e z-order
-        this.addMouseListener(new MouseAdapter(){
-            public void mousePressed(MouseEvent evt){
+        this.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent evt) {
                 frameState.focus = null;
-                for (int j = 0; j < frameState.figs.size(); j++){
+                for (int j = 0; j < frameState.figs.size(); j++) {
                     Figure fig = frameState.figs.get(j);
-                    if (fig.coordenadasDentro(evt.getX(), evt.getY())){
-                        frameState.focus = fig; 
+                    if (fig.coordenadasDentro(evt.getX(), evt.getY())) {
+                        frameState.focus = fig;
                         frameState.figs.remove(fig);
                         frameState.figs.add(frameState.focus);
-                        repaint();    
+                        repaint();
                         break;
-                    }else{
+                    } else {
                         frameState.focus = null;
                         repaint();
                     }
@@ -204,19 +210,20 @@ class ListFrame extends JFrame {
         this.setSize(700, 700);
     }
 
-    public void paint (Graphics g) {
+    public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         super.paint(g);
-        for (Figure fig: frameState.figs) {
+        for (Figure fig : frameState.figs) {
             fig.paint(g);
         }
-        if (frameState.focus != null){
+        if (frameState.focus != null) {
             // moldura do foco
-            if (frameState.focus.getCorFundo() != Color.RED && frameState.focus.getCorContorno() != Color.RED){
+            if (frameState.focus.getCorFundo() != Color.RED && frameState.focus.getCorContorno() != Color.RED) {
                 g2d.setColor(Color.RED);
             }
             g2d.setStroke(new BasicStroke(3));
-            g2d.drawRect(frameState.focus.getX(),frameState.focus.getY(), frameState.focus.getW(),frameState.focus.getH());
+            g2d.drawRect(frameState.focus.getX(), frameState.focus.getY(), frameState.focus.getW(),
+                    frameState.focus.getH());
         }
     }
 }
