@@ -2,6 +2,7 @@ package figures;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.awt.event.MouseEvent;
 
 public class Ellipse extends Figure {
 
@@ -52,7 +53,11 @@ public class Ellipse extends Figure {
     public Figure redimensionarH(){
         return new Ellipse(this.x, this.y, this.w, (this.h + 10), this.corFundo, this.corContorno);
     }
-
+    public Figure drag(MouseEvent e){
+        int dx = e.getX() - this.x;
+        int dy = e.getY() - this.y;
+        return new Ellipse(this.x + dx,this. y + dy,this.w,this.h, this.corFundo, this.corContorno );
+    }
 
     public void paint (Graphics g) {
         Graphics2D g2d = (Graphics2D) g;

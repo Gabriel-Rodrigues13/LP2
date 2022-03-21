@@ -1,6 +1,7 @@
 package figures;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 public abstract class Figure{
     public int x,y;
@@ -28,6 +29,7 @@ public abstract class Figure{
     public abstract Figure redimensionarY();
     public abstract Figure redimensionarW();
     public abstract Figure redimensionarH();
+    public abstract Figure drag(MouseEvent e);
 
 
 }

@@ -1,6 +1,6 @@
 package figures;
 import java.awt.*;
-
+import java.awt.event.MouseEvent;
 
 public class Arc extends Figure {
 
@@ -50,6 +50,11 @@ public class Arc extends Figure {
     }
     public Figure redimensionarH(){
         return new Arc(this.x, this.y, this.w, (this.h + 10), this.corFundo, this.corContorno);
+    }
+    public Figure drag(MouseEvent e){
+        int dx = e.getX() - this.x;
+        int dy = e.getY() - this.y;
+        return new Arc(this.x + dx,this. y + dy,this.w,this.h, this.corFundo, this.corContorno );
     }
 
     public void paint(Graphics g){

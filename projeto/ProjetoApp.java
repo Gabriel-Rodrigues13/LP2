@@ -1,12 +1,12 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
 import figures.*;
+import properties.Colours;
 
 class ProjetoApp {
     public static void main (String[] args) {
@@ -15,12 +15,13 @@ class ProjetoApp {
     }
 }
 
+
 class ListFrame extends JFrame {
     ArrayList<Figure> figs = new ArrayList<Figure>();
     Random rand = new Random();
     Figure focus = null;
-    Color corFundo = new Color(35, 40, 219);
-    Color corContorno = new Color(235,176,38);
+    Color corFundo = Colours.cor_fundo_um;
+    Color corContorno = Colours.cor_contorno_um;
     int[] posicaoMouse = new int[2]; 
 
     
@@ -40,6 +41,15 @@ class ListFrame extends JFrame {
                 posicaoMouse[0] = e.getX();
                 posicaoMouse[1] = e.getY();
             }
+
+        // Movendo a figura com o mouse 
+            public void mouseDragged(MouseEvent e){
+                Figure novaFigura = focus.drag(e);
+                figs.remove(focus);
+                figs.add(novaFigura);
+                focus = novaFigura;
+                repaint();
+            }
         });
 
         // Key listeners de mudança de cores
@@ -47,19 +57,23 @@ class ListFrame extends JFrame {
         this.addKeyListener(
             new KeyAdapter(){
                 public void keyPressed(KeyEvent evt){
-                    if (evt.getKeyCode() == KeyEvent.VK_1){
-                        corFundo = new Color(35, 40, 219);
-                        corContorno = new Color(235,176,38);
+                    switch(evt.getKeyCode()) {
+                        case KeyEvent.VK_1:
+                            corFundo = Colours.cor_fundo_um;
+                            corContorno = Colours.cor_contorno_um;
+                            break;
+                        case KeyEvent.VK_2:
+                            corFundo = Colours.cor_fundo_dois;
+                            corContorno = Colours.cor_contorno_dois;
+                            break;
+                        case KeyEvent.VK_3:
+                            corFundo = Colours.cor_fundo_tres;
+                            corContorno = Colours.cor_contorno_tres;
+                            break;
+                        default:
+                            break;
                     }
-                    else if (evt.getKeyCode() == KeyEvent.VK_2){
-                        corFundo = new Color(21, 219, 54);
-                        corContorno = new Color(242,195,12);
-                    }
-                    else if (evt.getKeyCode() == KeyEvent.VK_3){
-                        corFundo = new Color(192, 21, 219);
-                        corContorno = new Color(235,89,33);
-                    }
-                    repaint(); 
+                    repaint();
                 }
             }
         );

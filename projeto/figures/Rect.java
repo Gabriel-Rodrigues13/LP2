@@ -1,11 +1,13 @@
 package figures;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 // TODO: 
 // 1) Remover tamanho randomico (V)
 // 2) Manter quadrado como figura padrao (V)
 // 3) Criar figura na posição do mouse (V)
 // 4) Adicionar comportamento de mudar tamanho da figura com setas direcionais (V)
 // 5) Adicionar comportamento de mudar forma quando aperta s (?)
+
 
 public class Rect extends Figure {
 
@@ -55,6 +57,11 @@ public class Rect extends Figure {
     }
     public Figure redimensionarH(){
         return new Rect(this.x, this.y, this.w, (this.h + 10), this.corFundo, this.corContorno);
+    }
+    public Figure drag(MouseEvent e){
+        int dx = e.getX() - this.x;
+        int dy = e.getY() - this.y;
+        return new Rect(this.x + dx,this. y + dy,this.w,this.h, this.corFundo, this.corContorno );
     }
     public void paint(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
