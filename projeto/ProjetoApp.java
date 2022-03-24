@@ -17,6 +17,7 @@ class ProjetoApp {
     }
 }
 
+// Classe dos Event Handlers
 class EventHandlers {
     public FrameState frameState;
 
@@ -24,6 +25,7 @@ class EventHandlers {
         this.frameState = frameState;
     }
 
+    // Event Handlers de para trocar de cor
     public void handleColorSwitchEventColor(int keyCode) {
         switch (keyCode) {
             case KeyTypes.botaoPrimeiraCor:
@@ -47,6 +49,7 @@ class EventHandlers {
         }
     }
 
+    // Event Handlers para redimensionar a figura
     public void handleAlteracaoFiguras(int keyCode) {
         switch (keyCode) {
             case KeyTypes.botaoCriarRect:
@@ -94,17 +97,21 @@ class EventHandlers {
         }
     }
 
+    //  Redimensiona a figura
+
     private void resizeFigure(Figure novaFigura) {
         this.frameState.figs.remove(frameState.focus);
         this.frameState.figs.add(novaFigura);
         this.frameState.focus = novaFigura;
     }
 
+    //  Pega a posição do mouse na tela
     public void handleMouseMovement(MouseEvent e) {
         frameState.setMouseX(e.getX());
         frameState.setMouseY(e.getY());
     }
 
+    // Move a figura na tela quando o mouse é pressionado e arrastado
     public void mouseDragged(MouseEvent e) {
         Figure novaFigura = frameState.focus.drag(e);
         frameState.figs.remove(frameState.focus);
@@ -113,6 +120,8 @@ class EventHandlers {
     }
 
 }
+
+// Classe que guarda informaçoes do estado atual da aplicação
 
 class FrameState {
     ArrayList<Figure> figs = new ArrayList<Figure>();
@@ -164,12 +173,14 @@ class ListFrame extends JFrame {
                 });
 
         // Pegando a posição do cursor
+
         this.addMouseMotionListener(new MouseAdapter() {
             public void mouseMoved(MouseEvent e) {
                 eventHandler.handleMouseMovement(e);
             }
 
             // Movendo a figura com o mouse
+
             public void mouseDragged(MouseEvent e) {
                 eventHandler.mouseDragged(e);
                 repaint();
@@ -187,6 +198,7 @@ class ListFrame extends JFrame {
                 });
 
         // Key listeners de manipulaçao de figuras
+
         this.addKeyListener(
                 new KeyAdapter() {
                     public void keyPressed(KeyEvent evt) {
@@ -196,6 +208,7 @@ class ListFrame extends JFrame {
                 });
 
         // Criando foco e z-order
+
         this.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent evt) {
                 frameState.focus = null;
@@ -218,6 +231,8 @@ class ListFrame extends JFrame {
         this.setTitle("Projeto");
         this.setSize(700, 700);
     }
+
+    // Desenhando figura e foco
 
     public void paint(Graphics g) {
         super.paint(g);
