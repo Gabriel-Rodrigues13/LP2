@@ -1,8 +1,8 @@
-#1 Projeto do curso de Linguagem de Programação 2
+# 1 Projeto do curso de Linguagem de Programação 2
 
-##2 Objetivo: Criar um editor gráfico vetorial
+## 2 Objetivo: Criar um editor gráfico vetorial
 
-##3 Comandos possíveis da aplicação:
+## 3 Comandos possíveis da aplicação:
 
 - Definir padrao de cores 1: Tecla 1
 - Definir padrao de cores 2: Tecla 2
