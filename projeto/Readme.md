@@ -9,7 +9,7 @@
 - Definir padrao de cores 3: Tecla 3
 - Definir padrao de cores 4: Tecla 4
 - Criar um retângulo: Tecla R
-- Criar uma alipse: Tecla E
+- Criar uma elipse: Tecla E
 - Criar um arco de circunferência: Tecla A
 - Criar um retângulo com bordas arredondadas: Tecla O
 - Selecionar uma figura: Clicar nela com o mouse
