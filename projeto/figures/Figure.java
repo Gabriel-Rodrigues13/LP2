@@ -7,17 +7,18 @@ public abstract class Figure {
     public int x, y;
     public int w = 100;
     public int h = 50;
-    public Color corFundo, corContorno;
+    public Color[] corFundo;
+    public Color corContorno;
     public int tamanhoDeMudanca = 10;
 
-    public Figure(int x, int y, Color corFundo, Color corContorno) {
+    public Figure(int x, int y, Color[] corFundo, Color corContorno) {
         this.x = x;
         this.y = y;
         this.corFundo = corFundo;
         this.corContorno = corContorno;
     }
 
-    public Figure(int x, int y, int w, int h, Color corFundo, Color corContorno) {
+    public Figure(int x, int y, int w, int h, Color[] corFundo, Color corContorno) {
         this.x = x;
         this.y = y;
         this.w = w;
@@ -38,7 +39,7 @@ public abstract class Figure {
 
     public abstract int getH();
 
-    public abstract Color getCorFundo();
+    public abstract Color[] getCorFundo();
 
     public abstract Color getCorContorno();
 

@@ -27,16 +27,20 @@ class EventHandlers {
     public void handleColorSwitchEventColor(int keyCode) {
         switch (keyCode) {
             case KeyTypes.botaoPrimeiraCor:
-                frameState.updateCorContorno(Colours.cor_fundo_um);
-                frameState.updateCorFundo(Colours.cor_contorno_um);
+                frameState.updateCorContorno(Colours.cor_contorno_um);
+                frameState.updateCorFundo(Colours.cor_fundo_um);
                 break;
             case KeyTypes.botaoSegundaCor:
-                frameState.updateCorContorno(Colours.cor_fundo_dois);
-                frameState.updateCorFundo(Colours.cor_contorno_dois);
+                frameState.updateCorContorno(Colours.cor_contorno_dois);
+                frameState.updateCorFundo(Colours.cor_fundo_dois);
                 break;
             case KeyTypes.botaoTerceiraCor:
-                frameState.updateCorContorno(Colours.cor_fundo_tres);
-                frameState.updateCorFundo(Colours.cor_contorno_tres);
+                frameState.updateCorContorno(Colours.cor_contorno_tres);
+                frameState.updateCorFundo(Colours.cor_fundo_tres);
+                break;
+            case KeyTypes.botaoQuartaCor:
+                frameState.updateCorContorno(Colours.cor_contorno_quatro);
+                frameState.updateCorFundo(Colours.cor_fundo_quatro);
                 break;
             default:
                 break;
@@ -113,12 +117,12 @@ class EventHandlers {
 class FrameState {
     ArrayList<Figure> figs = new ArrayList<Figure>();
     Figure focus = null;
-    Color corFundo = Colours.cor_fundo_um;
+    Color[] corFundo = Colours.cor_fundo_um;
     Color corContorno = Colours.cor_contorno_um;
     private int posicaoMouseX = 0;
     private int posicaoMouseY = 0;
 
-    public void updateCorFundo(Color cor) {
+    public void updateCorFundo(Color[] cor) {
         this.corFundo = cor;
     }
 
@@ -216,13 +220,12 @@ class ListFrame extends JFrame {
     }
 
     public void paint(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
         super.paint(g);
         for (Figure fig : frameState.figs) {
             fig.paint(g);
         }
         if (frameState.focus != null) {
-            // moldura do foco
+
             frameState.focus.desenharContorno(g);
         }
     }
