@@ -50,6 +50,11 @@ class EventHandlers {
                         frameState.corFundo, frameState.corContorno);
                 frameState.figs.add(rect);
                 break;
+            case KeyTypes.botaoCriarRoundedRect:
+                RoundRect rr = new RoundRect(frameState.getMouseX(), frameState.getMouseY(),
+                        frameState.corFundo, frameState.corContorno);
+                frameState.figs.add(rr);
+                break;
             case KeyTypes.botaoCriarEllipse:
                 Ellipse elli = new Ellipse(frameState.getMouseX(), frameState.getMouseY(),
                         frameState.corFundo, frameState.corContorno);

@@ -1,13 +1,12 @@
 package figures;
 
 import java.awt.*;
-import javax.swing.*;
 import java.awt.event.MouseEvent;
 
 public abstract class Figure {
     public int x, y;
-    public int w = 50;
-    public int h = 100;
+    public int w = 100;
+    public int h = 50;
     public Color corFundo, corContorno;
     public int tamanhoDeMudanca = 10;
 
