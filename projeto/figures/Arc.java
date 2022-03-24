@@ -84,9 +84,9 @@ public class Arc extends Figure {
         GradientPaint fundo = new GradientPaint(this.x, this.y, this.corFundo[0], this.x + this.w, this.y + this.h,
                 this.corFundo[1]);
         g2d.setPaint(fundo);
-        g2d.fillArc(this.x, this.y, this.w, this.h, 0, 180);
+        g2d.fillArc(this.x, this.y, this.w, this.h, 45, 280);
         g2d.setColor(this.corContorno);
-        g2d.drawArc(this.x, this.y, this.w, this.h, 0, 180);
+        g2d.drawArc(this.x, this.y, this.w, this.h, 45, 280);
 
     }
 
@@ -96,7 +96,7 @@ public class Arc extends Figure {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.RED);
         g2d.setStroke(new BasicStroke(3));
-        g2d.drawArc(this.x - 1, this.y - 1, this.w + 1, this.h + 1, 0, 180);
+        g2d.drawArc(this.x - 1, this.y - 1, this.w + 1, this.h + 1, 45, 280);
 
     }
 
