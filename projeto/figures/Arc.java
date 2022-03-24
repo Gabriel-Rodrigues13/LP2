@@ -43,22 +43,22 @@ public class Arc extends Figure {
         return estaDentroX && estaDentroY;
     }
 
-    public Figure redimensionarX() {
+    public Figure reduzirEixoX() {
         int novoW = this.w - this.tamanhoDeMudanca;
         return new Arc(this.x, this.y, novoW, this.h, this.corFundo, this.corContorno);
     }
 
-    public Figure redimensionarY() {
+    public Figure aumentarEixoY() {
         int novoH = this.h - this.tamanhoDeMudanca;
         return new Arc(this.x, this.y, this.w, novoH, this.corFundo, this.corContorno);
     }
 
-    public Figure redimensionarW() {
+    public Figure aumentarEixoX() {
         int novoW = this.w + this.tamanhoDeMudanca;
         return new Arc(this.x, this.y, novoW, this.h, this.corFundo, this.corContorno);
     }
 
-    public Figure redimensionarH() {
+    public Figure reduzirEixoY() {
         int novoH = this.h + this.tamanhoDeMudanca;
         return new Arc(this.x, this.y, this.w, novoH, this.corFundo, this.corContorno);
     }
@@ -75,6 +75,14 @@ public class Arc extends Figure {
         g2d.fillArc(this.x, this.y, this.w, this.h, 0, 180);
         g2d.setColor(this.corContorno);
         g2d.drawArc(this.x, this.y, this.w, this.h, 0, 180);
+
+    }
+
+    public void desenharContorno(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(Color.RED);
+        g2d.setStroke(new BasicStroke(3));
+        g2d.drawArc(this.x - 1, this.y - 1, this.w + 1, this.h + 1, 0, 180);
 
     }
 

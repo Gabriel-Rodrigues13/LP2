@@ -69,16 +69,16 @@ class EventHandlers {
                 frameState.focus = null;
                 break;
             case KeyTypes.botaoResizeUp:
-                resizeFigure(frameState.focus.redimensionarY());
+                resizeFigure(frameState.focus.aumentarEixoY());
                 break;
             case KeyTypes.botaoResizeDown:
-                resizeFigure(frameState.focus.redimensionarH());
+                resizeFigure(frameState.focus.reduzirEixoY());
                 break;
             case KeyTypes.botaoResizeLeft:
-                resizeFigure(frameState.focus.redimensionarX());
+                resizeFigure(frameState.focus.reduzirEixoX());
                 break;
             case KeyTypes.botaoResizeRight:
-                resizeFigure(frameState.focus.redimensionarW());
+                resizeFigure(frameState.focus.aumentarEixoX());
                 break;
             default:
                 break;
@@ -218,12 +218,7 @@ class ListFrame extends JFrame {
         }
         if (frameState.focus != null) {
             // moldura do foco
-            if (frameState.focus.getCorFundo() != Color.RED && frameState.focus.getCorContorno() != Color.RED) {
-                g2d.setColor(Color.RED);
-            }
-            g2d.setStroke(new BasicStroke(3));
-            g2d.drawRect(frameState.focus.getX(), frameState.focus.getY(), frameState.focus.getW(),
-                    frameState.focus.getH());
+            frameState.focus.desenharContorno(g);
         }
     }
 }

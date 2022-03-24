@@ -44,22 +44,22 @@ public class Ellipse extends Figure {
         return estaDentroX && estaDentroY;
     }
 
-    public Figure redimensionarX() {
+    public Figure reduzirEixoX() {
         int novoW = this.w - this.tamanhoDeMudanca;
         return new Ellipse(this.x, this.y, novoW, this.h, this.corFundo, this.corContorno);
     }
 
-    public Figure redimensionarY() {
+    public Figure aumentarEixoY() {
         int novoH = this.h - this.tamanhoDeMudanca;
         return new Ellipse(this.x, this.y, this.w, novoH, this.corFundo, this.corContorno);
     }
 
-    public Figure redimensionarW() {
+    public Figure aumentarEixoX() {
         int novoW = this.w + this.tamanhoDeMudanca;
         return new Ellipse(this.x, this.y, novoW, this.h, this.corFundo, this.corContorno);
     }
 
-    public Figure redimensionarH() {
+    public Figure reduzirEixoY() {
         int novoH = this.h + this.tamanhoDeMudanca;
         return new Ellipse(this.x, this.y, this.w, novoH, this.corFundo, this.corContorno);
     }
@@ -76,5 +76,13 @@ public class Ellipse extends Figure {
         g2d.fill(new Ellipse2D.Double(this.x, this.y, this.w, this.h));
         g2d.setColor(this.corContorno);
         g2d.draw(new Ellipse2D.Double(this.x, this.y, this.w, this.h));
+    }
+
+    public void desenharContorno(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(Color.RED);
+        g2d.setStroke(new BasicStroke(3));
+        g2d.draw(new Ellipse2D.Double(this.x - 1, this.y - 1, this.w + 1, this.h + 1));
+
     }
 }

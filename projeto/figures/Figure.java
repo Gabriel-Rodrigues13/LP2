@@ -1,6 +1,7 @@
 package figures;
 
 import java.awt.*;
+import javax.swing.*;
 import java.awt.event.MouseEvent;
 
 public abstract class Figure {
@@ -42,13 +43,15 @@ public abstract class Figure {
 
     public abstract Color getCorContorno();
 
-    public abstract Figure redimensionarX();
+    public abstract Figure reduzirEixoX();
 
-    public abstract Figure redimensionarY();
+    public abstract Figure reduzirEixoY();
 
-    public abstract Figure redimensionarW();
+    public abstract Figure aumentarEixoX();
 
-    public abstract Figure redimensionarH();
+    public abstract Figure aumentarEixoY();
+
+    public abstract void desenharContorno(Graphics g);
 
     public abstract Figure drag(MouseEvent e);
 
