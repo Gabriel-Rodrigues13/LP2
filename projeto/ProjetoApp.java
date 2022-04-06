@@ -29,20 +29,20 @@ class EventHandlers {
     public void handleColorSwitchEventColor(int keyCode) {
         switch (keyCode) {
             case KeyTypes.botaoPrimeiraCor:
-                frameState.updateCorContorno(Colours.cor_contorno_um);
-                frameState.updateCorFundo(Colours.cor_fundo_um);
+                frameState.updateCorContornoFoco(Colours.cor_contorno_um);
+                frameState.updateCorFundoFoco(Colours.cor_fundo_um);
                 break;
             case KeyTypes.botaoSegundaCor:
-                frameState.updateCorContorno(Colours.cor_contorno_dois);
-                frameState.updateCorFundo(Colours.cor_fundo_dois);
+                frameState.updateCorContornoFoco(Colours.cor_contorno_dois);
+                frameState.updateCorFundoFoco(Colours.cor_fundo_dois);
                 break;
             case KeyTypes.botaoTerceiraCor:
-                frameState.updateCorContorno(Colours.cor_contorno_tres);
-                frameState.updateCorFundo(Colours.cor_fundo_tres);
+                frameState.updateCorContornoFoco(Colours.cor_contorno_tres);
+                frameState.updateCorFundoFoco(Colours.cor_fundo_tres);
                 break;
             case KeyTypes.botaoQuartaCor:
-                frameState.updateCorContorno(Colours.cor_contorno_quatro);
-                frameState.updateCorFundo(Colours.cor_fundo_quatro);
+                frameState.updateCorContornoFoco(Colours.cor_contorno_quatro);
+                frameState.updateCorFundoFoco(Colours.cor_fundo_quatro);
                 break;
             default:
                 break;
@@ -130,6 +130,14 @@ class FrameState {
     Color corContorno = Colours.cor_contorno_um;
     private int posicaoMouseX = 0;
     private int posicaoMouseY = 0;
+
+    public void updateCorFundoFoco(Color[] cor) {
+        focus.corFundo = cor;
+    }
+
+    public void updateCorContornoFoco(Color cor) {
+        focus.corContorno = cor;
+    }
 
     public void updateCorFundo(Color[] cor) {
         this.corFundo = cor;
