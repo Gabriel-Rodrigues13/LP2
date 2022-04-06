@@ -50,12 +50,22 @@ public class Arc extends Figure {
     // Métodos para redimensionar a figura
 
     public Figure reduzirEixoX() {
-        int novoW = this.w - this.tamanhoDeMudanca;
+        int novoW;
+        if (this.w - this.tamanhoDeMudanca >= 1) {
+            novoW = this.w - this.tamanhoDeMudanca;
+        } else {
+            novoW = this.w;
+        }
         return new Arc(this.x, this.y, novoW, this.h, this.corFundo, this.corContorno);
     }
 
     public Figure aumentarEixoY() {
-        int novoH = this.h - this.tamanhoDeMudanca;
+        int novoH;
+        if (this.h - this.tamanhoDeMudanca >= 1) {
+            novoH = this.h - this.tamanhoDeMudanca;
+        } else {
+            novoH = this.h;
+        }
         return new Arc(this.x, this.y, this.w, novoH, this.corFundo, this.corContorno);
     }
 
