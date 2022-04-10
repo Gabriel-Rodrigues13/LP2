@@ -3,10 +3,14 @@ package properties;
 import java.awt.event.KeyEvent;
 
 public class KeyTypes {
-    public static final int botaoPrimeiraCor = KeyEvent.VK_1;
-    public static final int botaoSegundaCor = KeyEvent.VK_2;
-    public static final int botaoTerceiraCor = KeyEvent.VK_3;
-    public static final int botaoQuartaCor = KeyEvent.VK_4;
+    public static final int botaoPrimeiraCorFundo = KeyEvent.VK_1;
+    public static final int botaoSegundaCorFundo = KeyEvent.VK_2;
+    public static final int botaoTerceiraCorFundo = KeyEvent.VK_3;
+    public static final int botaoQuartaCorFundo = KeyEvent.VK_4;
+    public static final int botaoPrimeiraCorContorno = KeyEvent.VK_5;
+    public static final int botaoSegundaCorContorno = KeyEvent.VK_6;
+    public static final int botaoTerceiraCorContorno = KeyEvent.VK_7;
+    public static final int botaoQuartaCorContorno = KeyEvent.VK_8;
     public static final int botaoCriarRect = KeyEvent.VK_R;
     public static final int botaoCriarRoundedRect = KeyEvent.VK_O;
     public static final int botaoCriarEllipse = KeyEvent.VK_E;

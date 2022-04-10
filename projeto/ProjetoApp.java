@@ -28,20 +28,28 @@ class EventHandlers {
     // Event Handlers de para trocar de cor
     public void handleColorSwitchEventColor(int keyCode) {
         switch (keyCode) {
-            case KeyTypes.botaoPrimeiraCor:
+            case KeyTypes.botaoPrimeiraCorContorno:
                 frameState.updateCorContornoFoco(Colours.cor_contorno_um);
+                break;
+            case KeyTypes.botaoPrimeiraCorFundo:
                 frameState.updateCorFundoFoco(Colours.cor_fundo_um);
                 break;
-            case KeyTypes.botaoSegundaCor:
+            case KeyTypes.botaoSegundaCorContorno:
                 frameState.updateCorContornoFoco(Colours.cor_contorno_dois);
+                break;
+            case KeyTypes.botaoSegundaCorFundo:
                 frameState.updateCorFundoFoco(Colours.cor_fundo_dois);
                 break;
-            case KeyTypes.botaoTerceiraCor:
+            case KeyTypes.botaoTerceiraCorContorno:
                 frameState.updateCorContornoFoco(Colours.cor_contorno_tres);
+                break;
+            case KeyTypes.botaoTerceiraCorFundo:
                 frameState.updateCorFundoFoco(Colours.cor_fundo_tres);
                 break;
-            case KeyTypes.botaoQuartaCor:
+            case KeyTypes.botaoQuartaCorContorno:
                 frameState.updateCorContornoFoco(Colours.cor_contorno_quatro);
+                break;
+            case KeyTypes.botaoQuartaCorFundo:
                 frameState.updateCorFundoFoco(Colours.cor_fundo_quatro);
                 break;
             default:
@@ -111,12 +119,18 @@ class EventHandlers {
         frameState.setMouseY(e.getY());
     }
 
+    public void mousePressed(MouseEvent e) {
+
+    }
+
     // Move a figura na tela quando o mouse é pressionado e arrastado
-    public void mouseDragged(MouseEvent e) {
-        Figure novaFigura = frameState.focus.drag(e);
-        frameState.figs.remove(frameState.focus);
-        frameState.figs.add(novaFigura);
-        frameState.focus = novaFigura;
+    public void mouseReleased(MouseEvent e) {
+        if ((e.getModifiersEx() & InputEvent.BUTTON1_DOWN_MASK) != 0) {
+            Figure novaFigura = frameState.focus.drag(e);
+            frameState.figs.remove(frameState.focus);
+            frameState.figs.add(novaFigura);
+            frameState.focus = novaFigura;
+        }
     }
 
 }
@@ -190,7 +204,7 @@ class ListFrame extends JFrame {
             // Movendo a figura com o mouse
 
             public void mouseDragged(MouseEvent e) {
-                eventHandler.mouseDragged(e);
+                eventHandler.mouseReleased(e);
                 repaint();
             }
         });

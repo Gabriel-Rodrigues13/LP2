@@ -44,8 +44,8 @@ public class Ellipse extends Figure {
     //  Define se um par de coordenadas estão dentro da figura
 
     public boolean coordenadasDentro(int coordenadasX, int coordenadasY) {
-        boolean estaDentroX = coordenadasX >= this.x && coordenadasX <= (this.x + this.w);
-        boolean estaDentroY = coordenadasY >= this.y && coordenadasY <= (this.y + this.h);
+        boolean estaDentroX = coordenadasX >= (this.x - 50) && coordenadasX <= (this.x + this.w);
+        boolean estaDentroY = coordenadasY >= (this.y - 25) && coordenadasY <= (this.y + this.h);
         return estaDentroX && estaDentroY;
     }
 
@@ -94,9 +94,10 @@ public class Ellipse extends Figure {
         GradientPaint fundo = new GradientPaint(this.x, this.y, this.corFundo[0], this.x + this.w, this.y + this.h,
                 this.corFundo[1]);
         g2d.setPaint(fundo);
-        g2d.fill(new Ellipse2D.Double(this.x, this.y, this.w, this.h));
+        g2d.fill(new Ellipse2D.Double(this.x - 50, this.y - 25, this.w, this.h));
         g2d.setColor(this.corContorno);
-        g2d.draw(new Ellipse2D.Double(this.x, this.y, this.w, this.h));
+        g2d.setStroke(new BasicStroke(3));
+        g2d.draw(new Ellipse2D.Double(this.x - 50, this.y - 25, this.w, this.h));
     }
 
     // Desenha o foco
@@ -104,7 +105,7 @@ public class Ellipse extends Figure {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.RED);
         g2d.setStroke(new BasicStroke(3));
-        g2d.draw(new Ellipse2D.Double(this.x - 1, this.y - 1, this.w + 1, this.h + 1));
+        g2d.draw(new Ellipse2D.Double(this.x - 51, this.y - 26, this.w + 1, this.h + 1));
 
     }
 }

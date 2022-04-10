@@ -4,10 +4,14 @@
 
 ## 3 Comandos possíveis da aplicação:
 
-- Definir padrao de cores 1: Tecla 1
-- Definir padrao de cores 2: Tecla 2
-- Definir padrao de cores 3: Tecla 3
-- Definir padrao de cores 4: Tecla 4
+- Definir cor de fundo 1: Tecla 1
+- Definir cor de fundo 2: Tecla 2
+- Definir cor de fundo 3: Tecla 3
+- Definir cor de fundo 4: Tecla 4
+- Definir cor de contorno 1: Tecla 5
+- Definir cor de contorno 2: Tecla 6
+- Definir cor de contorno 3: Tecla 7
+- Definir cor de contorno 4: Tecla 8
 - Criar um retângulo: Tecla R
 - Criar uma elipse: Tecla E
 - Criar um arco de circunferência: Tecla A
